@@ -191,5 +191,10 @@ extension MasterViewController: AddPlaceVCDelegate {
         }
     }
     
+    /// set edit flag back to false if back to master view with the back button
+    func falseEditFlag() {
+        editPlaceFlag = false
+    }
+    
 }
 
