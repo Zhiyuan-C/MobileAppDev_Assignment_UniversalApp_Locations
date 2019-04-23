@@ -83,7 +83,6 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
         if isEdit {
 //            addPlaceDelegate?.editPlace()
             addPlaceDelegate?.editPlace(name: nameText, address: addressText, latitude: latitude, longitude: longitude)
-            addPlaceDelegate?.doneEdit()
         }
             
         // Create new place and add to places
