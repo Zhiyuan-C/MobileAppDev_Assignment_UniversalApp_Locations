@@ -25,9 +25,6 @@ protocol AddPlaceVCDelegate: class {
     
     /// return the flag status of the editing mode
     func isEdit() -> Bool
-    
-    /// set flag to false after edit
-    func doneEdit()
 }
 
 class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
