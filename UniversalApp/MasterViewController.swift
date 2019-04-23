@@ -176,5 +176,14 @@ extension MasterViewController: AddPlaceVCDelegate {
     func currentPlace() -> Place {
         return places[selectedIndexRowForEdit]
     }
+    
+    /// return the flag status of the editing mode
+    func isEdit() -> Bool {
+        if editPlaceFlag {
+            return true
+        } else {
+            return false
+        }
+    }
 }
 
