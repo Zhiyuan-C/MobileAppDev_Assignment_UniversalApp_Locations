@@ -32,7 +32,7 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
     /// addPlace delegate
     weak var addPlaceDelegate: AddPlaceVCDelegate?
     /// flag to know if is edit mode or not
-    var edit = false
+    var isEdit = false
     /// a Place data
     var placeData: Place?
     
@@ -67,7 +67,7 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
               let latitude = Double(latitudeText) else { return }
         guard let longitudeText = placeLongitudeInput.text,
               let longitude = Double(longitudeText) else { return }
-        guard let isEdit = addPlaceDelegate?.isEdit() else { return }
+        isEdit = addPlaceDelegate?.isEdit() ?? false
         // if is edit mode
 //        if edit {
 //            placeData?.placeName = nameText
@@ -81,7 +81,6 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
 //            addPlaceDelegate?.editPlace()
             addPlaceDelegate?.editPlace(name: nameText, address: addressText, latitude: latitude, longitude: longitude)
         }
-            
         // Create new place and add to places
         else {
             let newPlace = Place(placeName: nameText, placeAddress: addressText, placeLatitude: latitude, placeLongitude: longitude)
