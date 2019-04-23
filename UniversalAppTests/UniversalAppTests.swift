@@ -23,6 +23,21 @@ class UniversalAppTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
+    
+    /// test case on Place class
+    func testPlace(){
+        // initialise
+        let placeName = "Brisbane CBD"
+        let placeAddress = "Brisbane"
+        let placeLatitude = 12.5
+        let placeLongitude = -25.25
+        let place = Place(placeName: placeName, placeAddress: placeAddress, placeLatitude: placeLatitude, placeLongitude: placeLongitude)
+        // Perform Test
+        XCTAssertEqual(place.placeName, placeName)
+        XCTAssertEqual(place.placeAddress, placeAddress)
+        XCTAssertEqual(place.placeLatitude, placeLatitude)
+        XCTAssertEqual(place.placeLongitude, placeLongitude)
+    }
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
