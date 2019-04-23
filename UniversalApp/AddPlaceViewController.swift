@@ -45,8 +45,13 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
         placeAddressInput.delegate = self
         placeLatitudeInput.delegate = self
         placeLongitudeInput.delegate = self
-        // display place into text field
-        displayPlace()
+        // if edit, then display place into text field
+        guard let editStatus = addPlaceDelegate?.isEdit() else { return }
+        if editStatus {
+            displayPlace()
+        }
+        
+        
     }
     @IBOutlet weak var placeNameInput: UITextField!
     @IBOutlet weak var placeAddressInput: UITextField!
@@ -65,7 +70,7 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
               let latitude = Double(latitudeText) else { return }
         guard let longitudeText = placeLongitudeInput.text,
               let longitude = Double(longitudeText) else { return }
-        
+        guard let isEdit = addPlaceDelegate?.isEdit() else { return }
         // if is edit mode
         if edit {
             placeData?.placeName = nameText
@@ -97,7 +102,8 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
     
     /// display place into text field
     func displayPlace(){
-        guard let place = placeData else { return }
+//        guard let place = placeData else { return }
+        guard let place = addPlaceDelegate?.currentPlace() else { return }
         placeNameInput.text = place.placeName
         placeAddressInput.text = place.placeAddress
         placeLatitudeInput.text = "\(place.placeLatitude)"
