@@ -15,6 +15,8 @@
 		443FB323225C8FE3008FBEC2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 443FB321225C8FE3008FBEC2 /* LaunchScreen.storyboard */; };
 		443FB32E225C8FE3008FBEC2 /* UniversalAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443FB32D225C8FE3008FBEC2 /* UniversalAppTests.swift */; };
 		443FB339225C8FE3008FBEC2 /* UniversalAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443FB338225C8FE3008FBEC2 /* UniversalAppUITests.swift */; };
+		443FB347225C9408008FBEC2 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443FB346225C9408008FBEC2 /* Place.swift */; };
+		443FB34E225CB0FD008FBEC2 /* AddPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443FB34D225CB0FD008FBEC2 /* AddPlaceViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,9 @@
 		443FB334225C8FE3008FBEC2 /* UniversalAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UniversalAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		443FB338225C8FE3008FBEC2 /* UniversalAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalAppUITests.swift; sourceTree = "<group>"; };
 		443FB33A225C8FE3008FBEC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		443FB346225C9408008FBEC2 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		443FB34B225CAB71008FBEC2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		443FB34D225CB0FD008FBEC2 /* AddPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlaceViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +88,7 @@
 				443FB32C225C8FE3008FBEC2 /* UniversalAppTests */,
 				443FB337225C8FE3008FBEC2 /* UniversalAppUITests */,
 				443FB314225C8FDD008FBEC2 /* Products */,
+				443FB34A225CAB70008FBEC2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,6 +107,8 @@
 			children = (
 				443FB316225C8FDD008FBEC2 /* AppDelegate.swift */,
 				443FB318225C8FDD008FBEC2 /* MasterViewController.swift */,
+				443FB34D225CB0FD008FBEC2 /* AddPlaceViewController.swift */,
+				443FB346225C9408008FBEC2 /* Place.swift */,
 				443FB31A225C8FDD008FBEC2 /* DetailViewController.swift */,
 				443FB31C225C8FDD008FBEC2 /* Main.storyboard */,
 				443FB31F225C8FE3008FBEC2 /* Assets.xcassets */,
@@ -126,6 +134,14 @@
 				443FB33A225C8FE3008FBEC2 /* Info.plist */,
 			);
 			path = UniversalAppUITests;
+			sourceTree = "<group>";
+		};
+		443FB34A225CAB70008FBEC2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				443FB34B225CAB71008FBEC2 /* CoreLocation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,9 +275,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				443FB34E225CB0FD008FBEC2 /* AddPlaceViewController.swift in Sources */,
 				443FB31B225C8FDD008FBEC2 /* DetailViewController.swift in Sources */,
 				443FB319225C8FDD008FBEC2 /* MasterViewController.swift in Sources */,
 				443FB317225C8FDD008FBEC2 /* AppDelegate.swift in Sources */,
+				443FB347225C9408008FBEC2 /* Place.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
