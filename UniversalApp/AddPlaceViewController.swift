@@ -25,6 +25,9 @@ protocol AddPlaceVCDelegate: class {
     
     /// return the flag status of the editing mode
     func isEdit() -> Bool
+    
+    /// set edit flag back to false if back to master view with the back button
+    func falseEditFlag()
 }
 
 class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
@@ -91,6 +94,7 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         addPlaceDelegate?.reloadTableView()
+        addPlaceDelegate?.falseEditFlag()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
