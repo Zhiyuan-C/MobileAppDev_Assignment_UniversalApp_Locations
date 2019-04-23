@@ -60,16 +60,16 @@ class MasterViewController: UITableViewController {
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
         }
-        // if identifier is the displayAddPlaceView, delegate to the AddPlaceViewController
-//        else if segue.identifier == "displayAddPlaceView" {
-//            guard let addPlaceVC = (segue.destination as! UINavigationController).topViewController as? AddPlaceViewController else { return }
-//            addPlaceVC.addPlaceDelegate = self
+//         if identifier is the displayAddPlaceView, delegate to the AddPlaceViewController
+        else if segue.identifier == "displayAddPlaceView" {
+            guard let addPlaceVC = (segue.destination as! UINavigationController).topViewController as? AddPlaceViewController else { return }
+            addPlaceVC.addPlaceDelegate = self
 //            if editPlaceFlag {
 //                addPlaceVC.edit = true
 //                addPlaceVC.placeData = places[selectedIndexRowForEdit]
 //            }
 //            editPlaceFlag = false
-//        }
+        }
     }
 
     // MARK: - Table View
