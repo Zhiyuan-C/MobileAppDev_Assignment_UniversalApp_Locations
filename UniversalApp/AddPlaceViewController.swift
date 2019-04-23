@@ -18,7 +18,7 @@ protocol AddPlaceVCDelegate: class {
     func addPlace(newPlace: Place)
     
     /// Pop view back to master, and reload the table view
-    func editPlace(name: String, address: String, Latitude: Double, Longitude: Double)
+    func editPlace(name: String, address: String, latitude: Double, longitude: Double)
     
     /// return current selected object
     func currentPlace() -> Place
@@ -82,7 +82,7 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
 //        }
         if isEdit {
 //            addPlaceDelegate?.editPlace()
-            addPlaceDelegate?.editPlace(name: nameText, address: addressText, Latitude: latitude, Longitude: longitude)
+            addPlaceDelegate?.editPlace(name: nameText, address: addressText, latitude: latitude, longitude: longitude)
             addPlaceDelegate?.doneEdit()
         }
             
