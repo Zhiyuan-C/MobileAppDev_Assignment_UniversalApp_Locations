@@ -172,6 +172,7 @@ extension MasterViewController: AddPlaceVCDelegate {
         places[selectedIndexRowForEdit].placeName = name
         places[selectedIndexRowForEdit].placeLatitude = latitude
         places[selectedIndexRowForEdit].placeLongitude = longitude
+        editPlaceFlag = false
         backToMaster()
         reloadTableView()
     }
@@ -190,9 +191,5 @@ extension MasterViewController: AddPlaceVCDelegate {
         }
     }
     
-    /// set flag to false after edit
-    func doneEdit() {
-        editPlaceFlag = false
-    }
 }
 
