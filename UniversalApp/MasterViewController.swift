@@ -68,6 +68,7 @@ class MasterViewController: UITableViewController {
                 addPlaceVC.edit = true
                 addPlaceVC.placeData = places[selectedIndexRowForEdit]
             }
+            editPlaceFlag = false
         }
     }
 
