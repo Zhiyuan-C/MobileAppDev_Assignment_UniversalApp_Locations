@@ -185,5 +185,10 @@ extension MasterViewController: AddPlaceVCDelegate {
             return false
         }
     }
+    
+    /// set flag to false after edit
+    func doneEdit() {
+        editPlaceFlag = false
+    }
 }
 
