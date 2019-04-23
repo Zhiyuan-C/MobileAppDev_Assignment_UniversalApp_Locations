@@ -63,6 +63,7 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
             placeData?.placeLatitude = latitude
             placeData?.placeLongitude = longitude
             addPlaceDelegate?.editPlace()
+            edit = false
         }
         // Create new place and add to places
         else {
