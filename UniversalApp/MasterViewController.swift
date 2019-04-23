@@ -172,5 +172,9 @@ extension MasterViewController: AddPlaceVCDelegate {
         reloadTableView()
     }
     
+    /// return current selected object
+    func currentPlace() -> Place {
+        return places[selectedIndexRowForEdit]
+    }
 }
 
