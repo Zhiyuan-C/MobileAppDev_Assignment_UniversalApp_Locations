@@ -17,6 +17,7 @@
 		443FB339225C8FE3008FBEC2 /* UniversalAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443FB338225C8FE3008FBEC2 /* UniversalAppUITests.swift */; };
 		443FB347225C9408008FBEC2 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443FB346225C9408008FBEC2 /* Place.swift */; };
 		443FB34E225CB0FD008FBEC2 /* AddPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443FB34D225CB0FD008FBEC2 /* AddPlaceViewController.swift */; };
+		4469D851227737FB007BC57B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 443FB34B225CAB71008FBEC2 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4469D851227737FB007BC57B /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
