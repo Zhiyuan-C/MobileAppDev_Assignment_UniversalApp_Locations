@@ -92,6 +92,10 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
+    @IBAction func cancelTapped(_ sender: Any) {
+    }
+    
+    
     override func viewWillDisappear(_ animated: Bool) {
         addPlaceDelegate?.reloadTableView()
         addPlaceDelegate?.falseEditFlag()

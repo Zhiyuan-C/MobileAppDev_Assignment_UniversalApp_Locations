@@ -246,7 +246,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New place" id="eIP-jC-s40">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="RQA-Y6-mYF"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="RQA-Y6-mYF">
+                            <connections>
+                                <action selector="cancelTapped:" destination="V2G-qx-SD3" id="LuJ-ME-dsE"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="doneButton" destination="nE6-r0-ECx" id="PiY-GN-sKa"/>
