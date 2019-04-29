@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CoreLocation
 protocol AddPlaceVCDelegate: class {
     /// Reload table view
     func reloadTableView()
@@ -70,9 +70,9 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
         let nameText = placeNameInput.text ?? ""
         let addressText = placeAddressInput.text ?? ""
         guard let latitudeText = placeLatitudeInput.text,
-              let latitude = Double(latitudeText) else { return }
+              let latitude = CLLocationDegrees(latitudeText) else { return }
         guard let longitudeText = placeLongitudeInput.text,
-              let longitude = Double(longitudeText) else { return }
+              let longitude = CLLocationDegrees(longitudeText) else { return }
         isEdit = addPlaceDelegate?.isEdit() ?? false
         // if is edit mode
 //        if edit {
@@ -117,8 +117,8 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
         guard let place = addPlaceDelegate?.currentPlace() else { return }
         placeNameInput.text = place.placeName
         placeAddressInput.text = place.placeAddress
-        placeLatitudeInput.text = "\(place.placeLatitude)"
-        placeLongitudeInput.text = "\(place.placeLongitude)"
+        placeLatitudeInput.text = "\(place.placeLatitude.latitude)"
+        placeLongitudeInput.text = "\(place.placeLongitude.longitude)"
     }
     
 }
