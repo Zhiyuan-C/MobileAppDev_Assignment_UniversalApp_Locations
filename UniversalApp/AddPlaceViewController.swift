@@ -21,7 +21,7 @@ protocol AddPlaceVCDelegate: class {
     func addPlace(newPlace: Place)
     
     /// Pop view back to master, and reload the table view
-    func editPlace(name: String, address: String, latitude: Double, longitude: Double)
+    func editPlace(name: String, address: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees)
     
     /// return current selected object
     func currentPlace() -> Place
