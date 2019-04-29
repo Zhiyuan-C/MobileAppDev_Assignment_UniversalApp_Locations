@@ -23,6 +23,7 @@ class MasterViewController: UITableViewController {
     let fileDirct = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,14 +42,14 @@ class MasterViewController: UITableViewController {
 //        if places.count > 0 {
 //            read()
 //        }
-        isFirstLaunch()
-        
+        read()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
     }
+    
     
     // MARK: - Segues
     
@@ -152,7 +153,7 @@ class MasterViewController: UITableViewController {
     // create propertyListEncoder
     
     
-    func save() {
+    func save(){
         do {
             let propertyList = try encoder.encode(places)
             let fileSaveURL = fileDirct.appendingPathComponent("places.plist")
@@ -217,6 +218,7 @@ extension MasterViewController: AddPlaceVCDelegate {
     /// - Parameter newPlace: new Place created in AddPlaceViewController
     func addPlace(newPlace: Place){
         places.append(newPlace)
+        save()
         backToMaster()
         reloadTableView()
     }
@@ -228,6 +230,7 @@ extension MasterViewController: AddPlaceVCDelegate {
         places[selectedIndexRowForEdit].placeLatitude = latitude
         places[selectedIndexRowForEdit].placeLongitude = longitude
         editPlaceFlag = false
+        save()
         backToMaster()
         reloadTableView()
     }
