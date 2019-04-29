@@ -19,6 +19,9 @@ class MasterViewController: UITableViewController {
     var editPlaceFlag = false
     /// int for determine which row is selected to edit
     var selectedIndexRowForEdit: Int = 0
+    let encoder = PropertyListEncoder()
+    let fileDirct = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +36,8 @@ class MasterViewController: UITableViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
+        
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -140,17 +145,25 @@ class MasterViewController: UITableViewController {
     //MARK: - Persistence
     // experiment with persistence
     // create propertyListEncoder
-    let encoder = PropertyListEncoder()
-    let fileDrict = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    
     
     func save() {
         do {
             let propertyList = try encoder.encode(places)
-            let fileSaveURL = fileDrict.appendingPathComponent("places.plist")
+            let fileSaveURL = fileDirct.appendingPathComponent("places.plist")
             print(fileSaveURL)
             // write
             try propertyList.write(to: fileSaveURL, options: .atomic)
+            
+        } catch {
+            print("Error: \(error)")
+        }
+    }
+    
+    func read() {
+        do {
             // read
+            let fileSaveURL = fileDirct.appendingPathComponent("places.plist")
             let data = try Data(contentsOf: fileSaveURL)
             let decoder = PropertyListDecoder()
             places = try decoder.decode([Place].self, from: data)
