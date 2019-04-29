@@ -38,10 +38,10 @@ class MasterViewController: UITableViewController {
         }
         
         // call read func
-        if places.count > 0 {
-            read()
-        }
-        
+//        if places.count > 0 {
+//            read()
+//        }
+        isFirstLaunch()
         
     }
 
@@ -175,6 +175,19 @@ class MasterViewController: UITableViewController {
             print("Got \(places.count) places: \(places)")
         } catch {
             print("Error: \(error)")
+        }
+    }
+    
+    // function to detect first launch
+    func isFirstLaunch()->Bool{
+        let userDefault = UserDefaults.standard
+        if let _ = userDefault.string(forKey: "isFirstLaunch") {
+            print("Not first time")
+            return false
+        } else {
+            userDefault.set(true, forKey: "isFirstLaunch")
+            print("is first time")
+            return true
         }
     }
     
