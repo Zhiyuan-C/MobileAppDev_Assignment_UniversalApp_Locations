@@ -13,9 +13,9 @@ import CoreLocation
 class Place {
     var placeName: String
     var placeAddress: String
-    var placeLatitude: Double
-    var placeLongitude: Double
-    init(placeName: String, placeAddress: String, placeLatitude: Double, placeLongitude: Double) {
+    var placeLatitude: CLLocationCoordinate2D
+    var placeLongitude: CLLocationCoordinate2D
+    init(placeName: String, placeAddress: String, placeLatitude: CLLocationCoordinate2D, placeLongitude: CLLocationCoordinate2D) {
         self.placeName = placeName
         self.placeAddress = placeAddress
         self.placeLatitude = placeLatitude
