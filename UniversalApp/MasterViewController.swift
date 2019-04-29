@@ -128,6 +128,7 @@ class MasterViewController: UITableViewController {
         let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
             self.places.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .fade)
+            self.save()
             completion(true)
         }
         return action
