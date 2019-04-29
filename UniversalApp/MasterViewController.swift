@@ -37,6 +37,11 @@ class MasterViewController: UITableViewController {
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
         
+        // call read func
+        if places.count > 0 {
+            read()
+        }
+        
         
     }
 
@@ -160,7 +165,7 @@ class MasterViewController: UITableViewController {
         }
     }
     
-    func read() {
+    func read(){
         do {
             // read
             let fileSaveURL = fileDirct.appendingPathComponent("places.plist")
