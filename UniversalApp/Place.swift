@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 
 /// Place class, which contains place name, address, latitude and longitude
-class Place {
+class Place: Codable {
     var placeName: String
     var placeAddress: String
     var placeLatitude: CLLocationDegrees
