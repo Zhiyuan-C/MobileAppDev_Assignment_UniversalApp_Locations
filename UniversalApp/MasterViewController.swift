@@ -166,7 +166,7 @@ extension MasterViewController: AddPlaceVCDelegate {
     }
     
     /// Pop view back to master, and reload the table view
-    func editPlace(name: String, address: String, latitude: Double, longitude: Double) {
+    func editPlace(name: String, address: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
         places[selectedIndexRowForEdit].placeAddress = address
         places[selectedIndexRowForEdit].placeName = name
         places[selectedIndexRowForEdit].placeLatitude = latitude
