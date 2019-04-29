@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 /// Place class, which contains place name, address, latitude and longitude
 class Place {
