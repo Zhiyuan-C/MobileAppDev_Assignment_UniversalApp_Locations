@@ -96,6 +96,7 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func cancelTapped(_ sender: Any) {
+        addPlaceDelegate?.backToMaster()
     }
     
     
