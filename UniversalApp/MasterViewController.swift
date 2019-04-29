@@ -7,9 +7,10 @@
 //
 import CoreLocation
 import UIKit
+import Foundation
 
 class MasterViewController: UITableViewController {
-    // initialise varibles
+    //MARK: - initialise varibles
     /// DetailViewController
     var detailViewController: DetailViewController? = nil
     /// places which contains array of Place
@@ -135,6 +136,30 @@ class MasterViewController: UITableViewController {
         action.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
         return action
     }
+    
+    //MARK: - Persistence
+    // experiment with persistence
+    // create propertyListEncoder
+    let encoder = PropertyListEncoder()
+    let fileDrict = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    
+    func save() {
+        do {
+            let propertyList = try encoder.encode(places)
+            let fileSaveURL = fileDrict.appendingPathComponent("places.plist")
+            print(fileSaveURL)
+            // write
+            try propertyList.write(to: fileSaveURL, options: .atomic)
+            // read
+            let data = try Data(contentsOf: fileSaveURL)
+            let decoder = PropertyListDecoder()
+            places = try decoder.decode([Place].self, from: data)
+            print("Got \(places.count) places: \(places)")
+        } catch {
+            print("Error: \(error)")
+        }
+    }
+    
 }
 
 //MARK: - AddPlaceVC Delegate
