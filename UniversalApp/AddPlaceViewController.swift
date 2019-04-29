@@ -12,6 +12,9 @@ protocol AddPlaceVCDelegate: class {
     /// Reload table view
     func reloadTableView()
     
+    /// Let view pop back to the MasterViewController
+    func backToMaster()
+    
     /// append place to places
     ///
     /// - Parameter newPlace: new Place created in AddPlaceViewController
