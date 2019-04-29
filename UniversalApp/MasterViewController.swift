@@ -179,19 +179,6 @@ class MasterViewController: UITableViewController {
         }
     }
     
-    // function to detect first launch
-    func isFirstLaunch()->Bool{
-        let userDefault = UserDefaults.standard
-        if let _ = userDefault.string(forKey: "isFirstLaunch") {
-            print("Not first time")
-            return false
-        } else {
-            userDefault.set(true, forKey: "isFirstLaunch")
-            print("is first time")
-            return true
-        }
-    }
-    
 }
 
 //MARK: - AddPlaceVC Delegate
