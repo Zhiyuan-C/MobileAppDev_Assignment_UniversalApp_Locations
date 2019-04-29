@@ -117,8 +117,8 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
         guard let place = addPlaceDelegate?.currentPlace() else { return }
         placeNameInput.text = place.placeName
         placeAddressInput.text = place.placeAddress
-        placeLatitudeInput.text = "\(place.placeLatitude.latitude)"
-        placeLongitudeInput.text = "\(place.placeLongitude.longitude)"
+        placeLatitudeInput.text = "\(place.placeLatitude)"
+        placeLongitudeInput.text = "\(place.placeLongitude)"
     }
     
 }
