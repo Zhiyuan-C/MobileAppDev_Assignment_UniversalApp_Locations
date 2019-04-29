@@ -42,6 +42,9 @@ class MasterViewController: UITableViewController {
 //        if places.count > 0 {
 //            read()
 //        }
+        if isFirstLaunch() {
+            save()
+        }
         read()
     }
 
