@@ -34,7 +34,7 @@ protocol AddPlaceVCDelegate: class {
 }
 
 class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
-    // initialise variables
+    // MARK: - initialise variables
     /// addPlace delegate
     weak var addPlaceDelegate: AddPlaceVCDelegate?
     /// flag to know if is edit mode or not
@@ -42,6 +42,14 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
     /// a Place data
     var placeData: Place?
     
+    // MARK: - IBOutlets
+    @IBOutlet weak var placeNameInput: UITextField!
+    @IBOutlet weak var placeAddressInput: UITextField!
+    @IBOutlet weak var placeLatitudeInput: UITextField!
+    @IBOutlet weak var placeLongitudeInput: UITextField!
+    @IBOutlet weak var doneButton: UIButton!
+    
+    // MARK: - Override functions
     override func viewDidLoad() {
         super.viewDidLoad()
         placeNameInput.delegate = self
@@ -53,15 +61,14 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
         if editStatus {
             displayPlace()
         }
-        
-        
     }
-    @IBOutlet weak var placeNameInput: UITextField!
-    @IBOutlet weak var placeAddressInput: UITextField!
-    @IBOutlet weak var placeLatitudeInput: UITextField!
-    @IBOutlet weak var placeLongitudeInput: UITextField!
-    @IBOutlet weak var doneButton: UIButton!
     
+    override func viewWillDisappear(_ animated: Bool) {
+        addPlaceDelegate?.reloadTableView()
+        addPlaceDelegate?.falseEditFlag()
+    }
+    
+    // MARK: - IBAction
     /// Perform action depend on add or edit
     ///
     /// - Parameter sender: Any
@@ -73,8 +80,8 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
               let latitude = CLLocationDegrees(latitudeText) else { return }
         guard let longitudeText = placeLongitudeInput.text,
               let longitude = CLLocationDegrees(longitudeText) else { return }
+        // edit the place
         isEdit = addPlaceDelegate?.isEdit() ?? false
-
         if isEdit {
             addPlaceDelegate?.editPlace(name: nameText, address: addressText, latitude: latitude, longitude: longitude)
         }
@@ -86,16 +93,14 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
+    /// Perform action when user tap the cancel button
+    ///
+    /// - Parameter sender: Any
     @IBAction func cancelTapped(_ sender: Any) {
         addPlaceDelegate?.backToMaster()
     }
     
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        addPlaceDelegate?.reloadTableView()
-        addPlaceDelegate?.falseEditFlag()
-    }
-    
+    // MARK: - UITextFieldDelegate function
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder() // dismiss keyboard
         
@@ -108,6 +113,10 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
         return true
     }
     
+    // MARK: - Custom functions to display value
+    /// Get the location coodinate by the name of the address and display to the text field
+    ///
+    /// - Parameter placeAddress: address of the place provide by the user
     func getLocation(placeAddress: String){
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(placeAddress){
@@ -125,7 +134,7 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
-    /// display place into text field
+    /// display place data into text field
     func displayPlace(){
         guard let place = addPlaceDelegate?.currentPlace() else { return }
         placeNameInput.text = place.placeName
