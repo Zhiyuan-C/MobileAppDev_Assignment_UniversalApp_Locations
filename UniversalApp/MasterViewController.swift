@@ -10,6 +10,7 @@ import UIKit
 import Foundation
 
 class MasterViewController: UITableViewController {
+    
     //MARK: - initialise varibles
     /// DetailViewController
     var detailViewController: DetailViewController? = nil
@@ -19,10 +20,12 @@ class MasterViewController: UITableViewController {
     var editPlaceFlag = false
     /// int for determine which row is selected to edit
     var selectedIndexRowForEdit: Int = 0
+    /// initialise property list encoder
     let encoder = PropertyListEncoder()
-    let fileDirct = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    /// initilaise the path to save the plist
+    let plistPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     
-    
+    // MARK: - view functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,10 +40,11 @@ class MasterViewController: UITableViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
-        
+        // if the app is first time launch, create and save the plist
         if isFirstLaunch() {
             save()
         }
+        // read the plist data
         read()
     }
 
@@ -51,7 +55,6 @@ class MasterViewController: UITableViewController {
     
     
     // MARK: - Segues
-    
     @objc
     /// perform segue way to display AddPlaceViewController
     ///
@@ -71,7 +74,7 @@ class MasterViewController: UITableViewController {
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
         }
-//         if identifier is the displayAddPlaceView, delegate to the AddPlaceViewController
+        // if identifier is the displayAddPlaceView, delegate to the AddPlaceViewController
         else if segue.identifier == "displayAddPlaceView" {
             guard let addPlaceVC = (segue.destination as! UINavigationController).topViewController as? AddPlaceViewController else { return }
             addPlaceVC.addPlaceDelegate = self
@@ -87,7 +90,6 @@ class MasterViewController: UITableViewController {
     // display data to the cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-
         let object = places[indexPath.row]
         cell.textLabel?.text = object.placeName
         return cell
@@ -144,33 +146,34 @@ class MasterViewController: UITableViewController {
     }
     
     //MARK: - Persistence
-    // experiment with persistence
-    // create propertyListEncoder
-    
-    
+
+    /// save the data as plisr
     func save(){
         do {
             let propertyList = try encoder.encode(places)
-            let fileSaveURL = fileDirct.appendingPathComponent("places.plist")
-            try propertyList.write(to: fileSaveURL, options: .atomic)
+            let savePlistURL = plistPath.appendingPathComponent("places.plist")
+            try propertyList.write(to: savePlistURL, options: .atomic)
             
         } catch {
             print("Error: \(error)")
         }
     }
     
+    /// read the plist data
     func read(){
         do {
-            let fileSaveURL = fileDirct.appendingPathComponent("places.plist")
-            let data = try Data(contentsOf: fileSaveURL)
+            let savePlistURL = plistPath.appendingPathComponent("places.plist")
+            let data = try Data(contentsOf: savePlistURL)
             let decoder = PropertyListDecoder()
             places = try decoder.decode([Place].self, from: data)
-            print("Got \(places.count) places: \(places)")
         } catch {
             print("Error: \(error)")
         }
     }
     // function to detect first launch
+    /// Detect if the app is first time launch or not
+    ///
+    /// - Returns: Bool, true if is first time, false if is not first time
     func isFirstLaunch()->Bool{
         let userDefault = UserDefaults.standard
         if let _ = userDefault.string(forKey: "isFirstLaunch") {
@@ -212,7 +215,7 @@ extension MasterViewController: AddPlaceVCDelegate {
         reloadTableView()
     }
     
-    /// Pop view back to master, and reload the table view
+    /// Edit and save the place data, and then Pop view back to master, and reload the table view
     func editPlace(name: String, address: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
         places[selectedIndexRowForEdit].placeAddress = address
         places[selectedIndexRowForEdit].placeName = name
