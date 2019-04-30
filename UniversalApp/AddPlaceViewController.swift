@@ -74,17 +74,8 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
         guard let longitudeText = placeLongitudeInput.text,
               let longitude = CLLocationDegrees(longitudeText) else { return }
         isEdit = addPlaceDelegate?.isEdit() ?? false
-        // if is edit mode
-//        if edit {
-//            placeData?.placeName = nameText
-//            placeData?.placeAddress = addressText
-//            placeData?.placeLatitude = latitude
-//            placeData?.placeLongitude = longitude
-//            addPlaceDelegate?.editPlace()
-//            edit = false
-//        }
+
         if isEdit {
-//            addPlaceDelegate?.editPlace()
             addPlaceDelegate?.editPlace(name: nameText, address: addressText, latitude: latitude, longitude: longitude)
         }
         // Create new place and add to places
@@ -107,8 +98,8 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder() // dismiss keyboard
-        // if user has enter place, then foward track the geolocation
         
+        // if user has enter place, then foward track the geolocation and display to the text field
         let placeAddress = placeAddressInput.text ?? ""
         if placeAddress != "" {
             getLocation(placeAddress: placeAddress)
@@ -127,7 +118,7 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
             print("Got \($0?.count ?? 0) elements:")
             for placeMark in placeMarks {
                 guard let location = placeMark.location else {continue}
-                print("Got \(location.coordinate) for \(placeAddress)") //location.coordinate.latitude; location.coordinate.logitude
+                print("Got \(location.coordinate) for \(placeAddress)")
                 self.placeLatitudeInput.text = "\(location.coordinate.latitude)"
                 self.placeLongitudeInput.text = "\(location.coordinate.longitude)"
                 
@@ -138,7 +129,6 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
     
     /// display place into text field
     func displayPlace(){
-//        guard let place = placeData else { return }
         guard let place = addPlaceDelegate?.currentPlace() else { return }
         placeNameInput.text = place.placeName
         placeAddressInput.text = place.placeAddress
