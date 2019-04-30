@@ -72,6 +72,10 @@ class MasterViewController: UITableViewController {
                 controller.placeDetail = object
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
+            } else {
+                // reload if none select
+                guard let splitController = self.splitViewController?.viewControllers else { return }
+                self.detailViewController = splitController.last as? DetailViewController
             }
         }
         // if identifier is the displayAddPlaceView, delegate to the AddPlaceViewController
@@ -125,6 +129,10 @@ class MasterViewController: UITableViewController {
             self.places.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .fade)
             self.save()
+            // reload detail view when is in split mode
+            if self.splitViewController?.viewControllers.count == 2 {
+                self.performSegue(withIdentifier: "showDetail", sender: self)
+            }
             completion(true)
         }
         return action
@@ -225,6 +233,10 @@ extension MasterViewController: AddPlaceVCDelegate {
         save()
         backToMaster()
         reloadTableView()
+        // reload detail view when is in split mode
+        if self.splitViewController?.viewControllers.count == 2 {
+            self.performSegue(withIdentifier: "showDetail", sender: self)
+        }
     }
     
     /// return current selected object
