@@ -112,13 +112,11 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(placeAddress){
             guard let placeMarks = $0 else {
-                print("Got error: \(String(describing: $1))")
+                print("Error for geocode: \(String(describing: $1))")
                 return
             }
-            print("Got \($0?.count ?? 0) elements:")
             for placeMark in placeMarks {
                 guard let location = placeMark.location else {continue}
-                print("Got \(location.coordinate) for \(placeAddress)")
                 self.placeLatitudeInput.text = "\(location.coordinate.latitude)"
                 self.placeLongitudeInput.text = "\(location.coordinate.longitude)"
                 
