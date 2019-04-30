@@ -38,10 +38,6 @@ class MasterViewController: UITableViewController {
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
         
-        // call read func
-//        if places.count > 0 {
-//            read()
-//        }
         if isFirstLaunch() {
             save()
         }
@@ -79,11 +75,6 @@ class MasterViewController: UITableViewController {
         else if segue.identifier == "displayAddPlaceView" {
             guard let addPlaceVC = (segue.destination as! UINavigationController).topViewController as? AddPlaceViewController else { return }
             addPlaceVC.addPlaceDelegate = self
-//            if editPlaceFlag {
-//                addPlaceVC.edit = true
-//                addPlaceVC.placeData = places[selectedIndexRowForEdit]
-//            }
-//            editPlaceFlag = false
         }
     }
 
@@ -161,8 +152,6 @@ class MasterViewController: UITableViewController {
         do {
             let propertyList = try encoder.encode(places)
             let fileSaveURL = fileDirct.appendingPathComponent("places.plist")
-            print(fileSaveURL)
-            // write
             try propertyList.write(to: fileSaveURL, options: .atomic)
             
         } catch {
@@ -172,7 +161,6 @@ class MasterViewController: UITableViewController {
     
     func read(){
         do {
-            // read
             let fileSaveURL = fileDirct.appendingPathComponent("places.plist")
             let data = try Data(contentsOf: fileSaveURL)
             let decoder = PropertyListDecoder()
@@ -186,11 +174,9 @@ class MasterViewController: UITableViewController {
     func isFirstLaunch()->Bool{
         let userDefault = UserDefaults.standard
         if let _ = userDefault.string(forKey: "isFirstLaunch") {
-            print("Not first time")
             return false
         } else {
             userDefault.set(true, forKey: "isFirstLaunch")
-            print("is first time")
             return true
         }
     }
