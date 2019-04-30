@@ -107,26 +107,18 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder() // dismiss keyboard
-        textField.clearsOnBeginEditing = true // clear text field when begin edit
         // if user has enter place, then foward track the geolocation
         
         let placeAddress = placeAddressInput.text ?? ""
-        let placeName = placeNameInput.text ?? ""
         if placeAddress != "" {
-            
+            getLocation(placeAddress: placeAddress)
         }
-        else if placeName != "" {
-            
-        }
-        
-        
         
         return true
     }
     
-    func getLocation(placeAddress: String) -> CLLocationCoordinate2D {
+    func getLocation(placeAddress: String){
         let geoCoder = CLGeocoder()
-        var geoLocation = CLLocationCoordinate2D()
         geoCoder.geocodeAddressString(placeAddress){
             guard let placeMarks = $0 else {
                 print("Got error: \(String(describing: $1))")
@@ -135,12 +127,12 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
             print("Got \($0?.count ?? 0) elements:")
             for placeMark in placeMarks {
                 guard let location = placeMark.location else {continue}
-                geoLocation = location.coordinate
                 print("Got \(location.coordinate) for \(placeAddress)") //location.coordinate.latitude; location.coordinate.logitude
+                self.placeLatitudeInput.text = "\(location.coordinate.latitude)"
+                self.placeLongitudeInput.text = "\(location.coordinate.longitude)"
                 
             }
         }
-        return geoLocation
         
     }
     
