@@ -42,10 +42,10 @@ class MasterViewController: UITableViewController {
         }
         // if the app is first time launch, create and save the plist
         if isFirstLaunch() {
-            save()
+            savePlist()
         }
         // read the plist data
-        read()
+        readPlist()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -128,7 +128,7 @@ class MasterViewController: UITableViewController {
         let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
             self.places.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .fade)
-            self.save()
+            self.savePlist()
             // reload detail view when is in split mode
             if self.splitViewController?.viewControllers.count == 2 {
                 self.performSegue(withIdentifier: "showDetail", sender: self)
@@ -156,7 +156,7 @@ class MasterViewController: UITableViewController {
     //MARK: - Persistence
 
     /// save the data as plisr
-    func save(){
+    func savePlist(){
         do {
             let propertyList = try encoder.encode(places)
             let savePlistURL = plistPath.appendingPathComponent("places.plist")
@@ -168,7 +168,7 @@ class MasterViewController: UITableViewController {
     }
     
     /// read the plist data
-    func read(){
+    func readPlist(){
         do {
             let savePlistURL = plistPath.appendingPathComponent("places.plist")
             let data = try Data(contentsOf: savePlistURL)
@@ -218,7 +218,7 @@ extension MasterViewController: AddPlaceVCDelegate {
     /// - Parameter newPlace: new Place created in AddPlaceViewController
     func addPlace(newPlace: Place){
         places.append(newPlace)
-        save()
+        savePlist()
         backToMaster()
         reloadTableView()
     }
@@ -230,7 +230,7 @@ extension MasterViewController: AddPlaceVCDelegate {
         places[selectedIndexRowForEdit].placeLatitude = latitude
         places[selectedIndexRowForEdit].placeLongitude = longitude
         editPlaceFlag = false
-        save()
+        savePlist()
         backToMaster()
         reloadTableView()
         // reload detail view when is in split mode
