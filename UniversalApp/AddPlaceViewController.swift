@@ -125,9 +125,9 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
                 return
             }
             for placeMark in placeMarks {
-                guard let location = placeMark.location else {continue}
-                self.placeLatitudeInput.text = "\(location.coordinate.latitude)"
-                self.placeLongitudeInput.text = "\(location.coordinate.longitude)"
+                guard let currentLocation = placeMark.location else {continue}
+                self.placeLatitudeInput.text = "\(currentLocation.coordinate.latitude)"
+                self.placeLongitudeInput.text = "\(currentLocation.coordinate.longitude)"
                 
             }
         }
