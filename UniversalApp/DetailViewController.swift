@@ -36,6 +36,9 @@ class DetailViewController: UIViewController {
     }
 
     override func viewDidLoad() {
+        if self.splitViewController?.viewControllers.count == 2 {
+            navigationItem.rightBarButtonItem = editButtonItem
+        }
         super.viewDidLoad()
         displayData()
     }
@@ -46,6 +49,7 @@ class DetailViewController: UIViewController {
             displayData()
         }
     }
+    
  
     
 }
