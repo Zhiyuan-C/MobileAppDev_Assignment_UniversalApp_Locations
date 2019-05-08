@@ -32,13 +32,14 @@ class MasterViewController: UITableViewController {
         
         navigationItem.leftBarButtonItem = editButtonItem
         // add item
-//        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
-//        navigationItem.rightBarButtonItem = addButton
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
+        navigationItem.rightBarButtonItem = addButton
         
         // split view
         if let split = splitViewController {
             let controllers = split.viewControllers
-            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? AddPlaceViewController
+//            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
         // if the app is first time launch, create and save the plist
         if isFirstLaunch() {
@@ -53,28 +54,29 @@ class MasterViewController: UITableViewController {
         super.viewWillAppear(animated)
     }
     
-    @IBAction func addNewPlace(_ sender: Any) {
-        performSegue(withIdentifier: "displayAddPlaceView", sender: self)
-    }
+
     
     // MARK: - Segues
-//    @objc
+    @objc
     /// perform segue way to display AddPlaceViewController
     ///
     /// - Parameter sender: self, MasterViewController
-//    func insertNewObject(_ sender: Any) {
-//        performSegue(withIdentifier: "displayAddPlaceView", sender: self)
-//    }
+    func insertNewObject(_ sender: Any) {
+        performSegue(withIdentifier: "displayAddPlaceView", sender: self)
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // if identifier is showDetail, delegate to the detailViewController
-        if segue.identifier == "showDetail" {
+        if segue.identifier == "displayAddPlaceView" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let object = places[indexPath.row]
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                controller.placeDetail = object
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
+//                let object = places[indexPath.row]
+//                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
+                guard let addPlaceVC = (segue.destination as! UINavigationController).topViewController as? AddPlaceViewController else { return }
+//                controller.placeDetail = object
+//                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+//                controller.navigationItem.leftItemsSupplementBackButton = true
+                addPlaceVC.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+                addPlaceVC.navigationItem.leftItemsSupplementBackButton = true
             } else {
                 // reload if none select
                 guard let splitController = self.splitViewController?.viewControllers else { return }
@@ -82,11 +84,11 @@ class MasterViewController: UITableViewController {
             }
         }
         // if identifier is the displayAddPlaceView, delegate to the AddPlaceViewController
-        if segue.identifier == "displayAddPlaceView" {
-            guard let addPlaceVC = (segue.destination as! UINavigationController).topViewController as? AddPlaceViewController else { return }
-            addPlaceVC.addPlaceDelegate = self
-            
-        }
+//        if segue.identifier == "displayAddPlaceView" {
+//            guard let addPlaceVC = (segue.destination as! UINavigationController).topViewController as? AddPlaceViewController else { return }
+//            addPlaceVC.addPlaceDelegate = self
+//
+//        }
     }
 
     // MARK: - Table View

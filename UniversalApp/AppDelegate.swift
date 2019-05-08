@@ -49,8 +49,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
         guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
-        guard let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController else { return false }
-        if topAsDetailController.placeDetail == nil {
+        guard let topAsDetailController = secondaryAsNavController.topViewController as? AddPlaceViewController else { return false }
+//        guard let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController else { return false }
+//        if topAsDetailController.placeDetail == nil {
+//            // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
+//            return true
+//        }
+        
+        if topAsDetailController.placeData == nil {
             // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
             return true
         }
