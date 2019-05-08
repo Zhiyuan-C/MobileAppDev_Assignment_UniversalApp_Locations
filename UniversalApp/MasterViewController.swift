@@ -32,8 +32,8 @@ class MasterViewController: UITableViewController {
         
         navigationItem.leftBarButtonItem = editButtonItem
         // add item
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
-        navigationItem.rightBarButtonItem = addButton
+//        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
+//        navigationItem.rightBarButtonItem = addButton
         
         // split view
         if let split = splitViewController {
@@ -53,15 +53,18 @@ class MasterViewController: UITableViewController {
         super.viewWillAppear(animated)
     }
     
+    @IBAction func addNewPlace(_ sender: Any) {
+        performSegue(withIdentifier: "displayAddPlaceView", sender: self)
+    }
     
     // MARK: - Segues
-    @objc
+//    @objc
     /// perform segue way to display AddPlaceViewController
     ///
     /// - Parameter sender: self, MasterViewController
-    func insertNewObject(_ sender: Any) {
-        performSegue(withIdentifier: "displayAddPlaceView", sender: self)
-    }
+//    func insertNewObject(_ sender: Any) {
+//        performSegue(withIdentifier: "displayAddPlaceView", sender: self)
+//    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // if identifier is showDetail, delegate to the detailViewController
