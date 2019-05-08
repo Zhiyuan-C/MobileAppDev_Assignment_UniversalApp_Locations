@@ -318,6 +318,7 @@
                     <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="kyw-gj-L4S">
                             <connections>
+                                <action selector="addNewPlace:" destination="7bK-jq-Zjz" id="HKU-k5-u7V"/>
                                 <segue destination="3ly-FD-CCm" kind="show" identifier="displayAddPlaceView" id="3Fx-8r-0vc"/>
                             </connections>
                         </barButtonItem>
