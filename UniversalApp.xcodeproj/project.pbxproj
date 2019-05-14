@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4437DF40228AC5A200299A08 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4437DF3F228AC5A200299A08 /* MapKit.framework */; };
 		443FB317225C8FDD008FBEC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443FB316225C8FDD008FBEC2 /* AppDelegate.swift */; };
 		443FB319225C8FDD008FBEC2 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443FB318225C8FDD008FBEC2 /* MasterViewController.swift */; };
 		443FB31B225C8FDD008FBEC2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443FB31A225C8FDD008FBEC2 /* DetailViewController.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4437DF3F228AC5A200299A08 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		443FB313225C8FDD008FBEC2 /* UniversalApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniversalApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		443FB316225C8FDD008FBEC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		443FB318225C8FDD008FBEC2 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4437DF40228AC5A200299A08 /* MapKit.framework in Frameworks */,
 				4469D851227737FB007BC57B /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,6 +144,7 @@
 		443FB34A225CAB70008FBEC2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4437DF3F228AC5A200299A08 /* MapKit.framework */,
 				443FB34B225CAB71008FBEC2 /* CoreLocation.framework */,
 			);
 			name = Frameworks;
