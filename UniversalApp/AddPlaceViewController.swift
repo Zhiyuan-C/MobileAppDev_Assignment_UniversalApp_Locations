@@ -57,8 +57,12 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
         placeLatitudeInput.delegate = self
         placeLongitudeInput.delegate = self
         // if edit, then display place into text field
-        guard let editStatus = addPlaceDelegate?.isEdit() else { return }
-        if editStatus {
+//        guard let editStatus = addPlaceDelegate?.isEdit() else { return }
+//        print("editStatus => \(editStatus)")
+//        if editStatus {
+//            displayPlace()
+//        }
+        if isEdit {
             displayPlace()
         }
     }
@@ -66,6 +70,7 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         addPlaceDelegate?.reloadTableView()
         addPlaceDelegate?.falseEditFlag()
+        isEdit = false
     }
     
     // MARK: - IBAction
@@ -81,7 +86,8 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
         guard let longitudeText = placeLongitudeInput.text,
               let longitude = CLLocationDegrees(longitudeText) else { return }
         // edit the place
-        isEdit = addPlaceDelegate?.isEdit() ?? false
+//        isEdit = addPlaceDelegate?.isEdit() ?? false
+//        print("isEdit => \(isEdit)")
         if isEdit {
             addPlaceDelegate?.editPlace(name: nameText, address: addressText, latitude: latitude, longitude: longitude)
         }
