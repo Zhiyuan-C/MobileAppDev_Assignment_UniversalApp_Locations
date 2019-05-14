@@ -126,11 +126,24 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(createNewPlace(_:)))
         navigationItem.leftBarButtonItem = doneButton
         // if user has enter place, then foward track the geolocation and display to the text field
-        let placeAddress = placeAddressInput.text ?? ""
-        if placeAddress != "" {
-            getLocation(placeAddress: placeAddress)
+        if textField.accessibilityIdentifier == "addressText" {
+            let placeAddress = textField.text ?? ""
+            if placeAddress != "" {
+                getLocation(placeAddress: placeAddress)
+            }
         }
         // revertrack
+        if textField.accessibilityIdentifier == "latitudeText" || textField.accessibilityIdentifier == "longitudeText" {
+            print("get name")
+            let placeLatitude = placeLatitudeInput.text ?? ""
+            let placeLongtitude = placeLongitudeInput.text ?? ""
+            if placeLatitude != "" && placeLongtitude != "" {
+                let location = convertLocation(latitudeText: placeLatitude, longitudeText: placeLongtitude)
+                getName(latitude: location.latitude, longitude: location.longitude)
+            }
+        }
+        
+        
         return true
     }
     
@@ -153,11 +166,41 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
                 self.placeLatitudeInput.text = "\(currentLocation.coordinate.latitude)"
                 self.placeLongitudeInput.text = "\(currentLocation.coordinate.longitude)"
             }
-            self.displayLocation(latitude: current.coordinate.latitude, longitude: current.coordinate.longitude, placeName: self.placeNameInput.text ?? "")
-            
+            self.displayLocation(latitude: current.coordinate.latitude, longitude: current.coordinate.longitude, placeName: self.placeAddressInput.text ?? "")
         }
-        
-        
+    }
+    
+    func getName(latitude: CLLocationDegrees, longitude: CLLocationDegrees){
+        let geoCoder = CLGeocoder()
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+        geoCoder.reverseGeocodeLocation(location){
+            guard let places = $0 else {
+                print("Error-> \(String(describing: $1))")
+                return
+            }
+            for place in places {
+                let name = place.name ?? ""
+                let postalCode = place.postalCode ?? ""
+                let subLocality = place.subLocality ?? ""
+                let administrativeArea = place.administrativeArea ?? ""
+                let locality = place.locality ?? ""
+                self.placeNameInput.text = "\(name)"
+                self.placeAddressInput.text = "\(name), \(subLocality), \(locality), \(administrativeArea), \(postalCode)"
+                // 593 Boundary Street, Brisbane, Spring Hill, QLD, 4000
+                /*
+                country => Australia
+                name => 593 Boundary Street
+                postalCode => 4000
+                locality => Spring Hill
+                subLocality => Brisbane
+                administrativeArea => QLD
+                subAdministrativeArea =>
+                subThoroughfare => 593
+                thoroughfare => Boundary Street
+                */
+            }
+            self.displayLocation(latitude: latitude, longitude: longitude, placeName: self.placeAddressInput.text ?? "")
+        }
     }
     
     /// display place data into text field
@@ -184,6 +227,13 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
             self.map.addAnnotation(annotation)
         }
         
+    }
+    
+    func convertLocation(latitudeText: String, longitudeText: String) -> CLLocationCoordinate2D{
+        let latitude: CLLocationDegrees = CLLocationDegrees(latitudeText) ?? 0.0
+        let longitude: CLLocationDegrees = CLLocationDegrees(longitudeText) ?? 0.0
+        let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        return location
     }
     
     
