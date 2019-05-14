@@ -70,8 +70,8 @@ class MasterViewController: UITableViewController {
         if segue.identifier == "displayAddPlaceView" {
             guard let addPlaceVC = (segue.destination as! UINavigationController).topViewController as? AddPlaceViewController else { return }
             addPlaceVC.addPlaceDelegate = self
-            addPlaceVC.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-            addPlaceVC.navigationItem.leftItemsSupplementBackButton = true
+//            addPlaceVC.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+//            addPlaceVC.navigationItem.leftItemsSupplementBackButton = true
             if let indexPath = tableView.indexPathForSelectedRow{
                 let object = places[indexPath.row]
                 addPlaceVC.placeData = object

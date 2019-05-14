@@ -52,6 +52,7 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
     // MARK: - Override functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         placeNameInput.delegate = self
         placeAddressInput.delegate = self
         placeLatitudeInput.delegate = self
@@ -65,6 +66,11 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
         if isEdit {
             displayPlace()
         }
+//        if self.splitViewController?.viewControllers.count == 2 {
+//            let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(createNewPlace(_:)))
+//            navigationItem.leftBarButtonItem = doneButton
+//        }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
