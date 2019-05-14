@@ -252,9 +252,9 @@ extension MasterViewController: AddPlaceVCDelegate {
         backToMaster()
         reloadTableView()
         // reload detail view when is in split mode
-        if self.splitViewController?.viewControllers.count == 2 {
-            self.performSegue(withIdentifier: "displayAddPlaceView", sender: self)
-        }
+//        if self.splitViewController?.viewControllers.count == 2 {
+//            self.performSegue(withIdentifier: "displayAddPlaceView", sender: self)
+//        }
     }
     
     /// return current selected object
