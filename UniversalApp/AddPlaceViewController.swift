@@ -104,6 +104,9 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
     /// - Parameter sender: Any
     @IBAction func cancelTapped(_ sender: Any) {
         addPlaceDelegate?.backToMaster()
+        if self.splitViewController?.viewControllers.count == 2 {
+            displayPlace()
+        }
     }
     
     // MARK: - UITextFieldDelegate function
