@@ -97,6 +97,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <mapView key="tableFooterView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="1Gy-Kn-dFp">
+                            <rect key="frame" x="0.0" y="305.5" width="375" height="297"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </mapView>
                         <sections>
                             <tableViewSection headerTitle="NAME AND ADDRESS" id="woY-kh-Lvw">
                                 <cells>
@@ -241,6 +245,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="map" destination="1Gy-Kn-dFp" id="We3-kl-dkw"/>
                         <outlet property="placeAddressInput" destination="PR8-CS-eMQ" id="5sQ-t1-20i"/>
                         <outlet property="placeLatitudeInput" destination="2Hz-Hm-qew" id="t4F-jt-oyd"/>
                         <outlet property="placeLongitudeInput" destination="blx-ft-mV6" id="QvQ-9B-Rrx"/>
@@ -249,7 +254,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iil-rT-oJf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="978" y="128"/>
+            <point key="canvasLocation" x="976.79999999999995" y="127.28635682158921"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="Nki-YV-4Qg">

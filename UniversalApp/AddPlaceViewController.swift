@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import MapKit
 protocol AddPlaceVCDelegate: class {
     /// Reload table view
     func reloadTableView()
@@ -48,6 +49,7 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var placeLatitudeInput: UITextField!
     @IBOutlet weak var placeLongitudeInput: UITextField!
     @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var map: MKMapView!
     
     // MARK: - Override functions
     override func viewDidLoad() {
