@@ -69,8 +69,17 @@ class MasterViewController: UITableViewController {
         // if identifier is showDetail, delegate to the detailViewController
         if segue.identifier == "displayAddPlaceView" {
             guard let addPlaceVC = (segue.destination as! UINavigationController).topViewController as? AddPlaceViewController else { return }
+            addPlaceVC.addPlaceDelegate = self
             addPlaceVC.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
             addPlaceVC.navigationItem.leftItemsSupplementBackButton = true
+            if let indexPath = tableView.indexPathForSelectedRow{
+                let object = places[indexPath.row]
+                addPlaceVC.placeData = object
+                addPlaceVC.isEdit = true
+//                editPlaceFlag = true
+//                print("editPlaceFlag => \(editPlaceFlag)")
+                selectedIndexRowForEdit = indexPath.row
+            }
 //            if let indexPath = tableView.indexPathForSelectedRow {
 ////                let object = places[indexPath.row]
 ////                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
@@ -124,9 +133,9 @@ class MasterViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let delete = deleteAction(at: indexPath)
-        let edit = editAction(at: indexPath)
-        
-        return UISwipeActionsConfiguration(actions: [delete, edit])
+//        let edit = editAction(at: indexPath)
+        return UISwipeActionsConfiguration(actions: [delete])
+//        return UISwipeActionsConfiguration(actions: [delete, edit])
     }
     
     /// Create delete action, to delete the item from table
@@ -140,7 +149,7 @@ class MasterViewController: UITableViewController {
             self.savePlist()
             // reload detail view when is in split mode
             if self.splitViewController?.viewControllers.count == 2 {
-                self.performSegue(withIdentifier: "showDetail", sender: self)
+                self.performSegue(withIdentifier: "displayAddPlaceView", sender: self)
             }
             completion(true)
         }
@@ -151,16 +160,16 @@ class MasterViewController: UITableViewController {
     ///
     /// - Parameter indexPath: indexPath of the selected row
     /// - Returns: UIContextualAction
-    func editAction(at indexPath: IndexPath) -> UIContextualAction {
-        let action = UIContextualAction(style: .normal, title: "Edit") { (action, view, completion) in
-            self.editPlaceFlag = true
-            self.selectedIndexRowForEdit = indexPath.row
-            self.performSegue(withIdentifier: "displayAddPlaceView", sender: self)
-            completion(true)
-        }
-        action.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
-        return action
-    }
+//    func editAction(at indexPath: IndexPath) -> UIContextualAction {
+//        let action = UIContextualAction(style: .normal, title: "Edit") { (action, view, completion) in
+//            self.editPlaceFlag = true
+//            self.selectedIndexRowForEdit = indexPath.row
+//            self.performSegue(withIdentifier: "displayAddPlaceView", sender: self)
+//            completion(true)
+//        }
+//        action.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+//        return action
+//    }
     
     //MARK: - Persistence
 
@@ -244,7 +253,7 @@ extension MasterViewController: AddPlaceVCDelegate {
         reloadTableView()
         // reload detail view when is in split mode
         if self.splitViewController?.viewControllers.count == 2 {
-            self.performSegue(withIdentifier: "showDetail", sender: self)
+            self.performSegue(withIdentifier: "displayAddPlaceView", sender: self)
         }
     }
     
