@@ -69,6 +69,8 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
             displayPlace()
         }
         
+        
+        
 //        if self.splitViewController?.viewControllers.count == 2 {
 //            let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(createNewPlace(_:)))
 //            navigationItem.leftBarButtonItem = doneButton
@@ -128,7 +130,6 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
         if placeAddress != "" {
             getLocation(placeAddress: placeAddress)
         }
-        
         return true
     }
     
@@ -138,18 +139,23 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
     /// - Parameter placeAddress: address of the place provide by the user
     func getLocation(placeAddress: String){
         let geoCoder = CLGeocoder()
+        
         geoCoder.geocodeAddressString(placeAddress){
             guard let placeMarks = $0 else {
                 print("Error for geocode: \(String(describing: $1))")
                 return
             }
+            var current = CLLocation()
             for placeMark in placeMarks {
                 guard let currentLocation = placeMark.location else {continue}
+                current = currentLocation
                 self.placeLatitudeInput.text = "\(currentLocation.coordinate.latitude)"
                 self.placeLongitudeInput.text = "\(currentLocation.coordinate.longitude)"
-                
             }
+            self.displayLocation(latitude: current.coordinate.latitude, longitude: current.coordinate.longitude)
+            
         }
+        
         
     }
     
@@ -160,6 +166,14 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
         placeAddressInput.text = place.placeAddress
         placeLatitudeInput.text = "\(place.placeLatitude)"
         placeLongitudeInput.text = "\(place.placeLongitude)"
+        displayLocation(latitude: place.placeLatitude, longitude: place.placeLongitude)
     }
+    
+    func displayLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees){
+        let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        let locationRegion = MKCoordinateRegion(center: location, latitudinalMeters: 5_000, longitudinalMeters: 5_000)
+        map.setRegion(locationRegion, animated: true)
+    }
+    
     
 }
