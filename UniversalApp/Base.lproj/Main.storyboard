@@ -316,7 +316,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="kyw-gj-L4S"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="kyw-gj-L4S">
+                            <connections>
+                                <segue destination="vC3-pB-5Vb" kind="showDetail" id="ELK-Tc-alX"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>

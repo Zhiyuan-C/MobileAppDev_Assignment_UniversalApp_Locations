@@ -13,7 +13,7 @@ class MasterViewController: UITableViewController {
     
     //MARK: - initialise varibles
     /// DetailViewController
-    var detailViewController: DetailViewController? = nil
+    var detailViewController: AddPlaceViewController? = nil
     /// places which contains array of Place
     var places = [Place]()
     /// flag to check if is edit mode
@@ -80,7 +80,7 @@ class MasterViewController: UITableViewController {
             } else {
                 // reload if none select
                 guard let splitController = self.splitViewController?.viewControllers else { return }
-                self.detailViewController = splitController.last as? DetailViewController
+                self.detailViewController = splitController.last as? AddPlaceViewController
             }
         }
         // if identifier is the displayAddPlaceView, delegate to the AddPlaceViewController
