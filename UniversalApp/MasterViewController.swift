@@ -68,20 +68,23 @@ class MasterViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // if identifier is showDetail, delegate to the detailViewController
         if segue.identifier == "displayAddPlaceView" {
-            if let indexPath = tableView.indexPathForSelectedRow {
-//                let object = places[indexPath.row]
-//                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                guard let addPlaceVC = (segue.destination as! UINavigationController).topViewController as? AddPlaceViewController else { return }
-//                controller.placeDetail = object
-//                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-//                controller.navigationItem.leftItemsSupplementBackButton = true
-                addPlaceVC.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-                addPlaceVC.navigationItem.leftItemsSupplementBackButton = true
-            } else {
-                // reload if none select
-                guard let splitController = self.splitViewController?.viewControllers else { return }
-                self.detailViewController = splitController.last as? AddPlaceViewController
-            }
+            guard let addPlaceVC = (segue.destination as! UINavigationController).topViewController as? AddPlaceViewController else { return }
+            addPlaceVC.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+            addPlaceVC.navigationItem.leftItemsSupplementBackButton = true
+//            if let indexPath = tableView.indexPathForSelectedRow {
+////                let object = places[indexPath.row]
+////                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
+//                guard let addPlaceVC = (segue.destination as! UINavigationController).topViewController as? AddPlaceViewController else { return }
+////                controller.placeDetail = object
+////                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+////                controller.navigationItem.leftItemsSupplementBackButton = true
+//                addPlaceVC.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+//                addPlaceVC.navigationItem.leftItemsSupplementBackButton = true
+//            } else {
+//                // reload if none select
+//                guard let splitController = self.splitViewController?.viewControllers else { return }
+//                self.detailViewController = splitController.last as? AddPlaceViewController
+//            }
         }
         // if identifier is the displayAddPlaceView, delegate to the AddPlaceViewController
 //        if segue.identifier == "displayAddPlaceView" {
