@@ -130,6 +130,7 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
         if placeAddress != "" {
             getLocation(placeAddress: placeAddress)
         }
+        // revertrack
         return true
     }
     
@@ -152,7 +153,7 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
                 self.placeLatitudeInput.text = "\(currentLocation.coordinate.latitude)"
                 self.placeLongitudeInput.text = "\(currentLocation.coordinate.longitude)"
             }
-            self.displayLocation(latitude: current.coordinate.latitude, longitude: current.coordinate.longitude)
+            self.displayLocation(latitude: current.coordinate.latitude, longitude: current.coordinate.longitude, placeName: self.placeNameInput.text ?? "")
             
         }
         
@@ -166,13 +167,23 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
         placeAddressInput.text = place.placeAddress
         placeLatitudeInput.text = "\(place.placeLatitude)"
         placeLongitudeInput.text = "\(place.placeLongitude)"
-        displayLocation(latitude: place.placeLatitude, longitude: place.placeLongitude)
+        displayLocation(latitude: place.placeLatitude, longitude: place.placeLongitude, placeName: place.placeName)
     }
     
-    func displayLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees){
+    func displayLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees, placeName: String){
         let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let locationRegion = MKCoordinateRegion(center: location, latitudinalMeters: 5_000, longitudinalMeters: 5_000)
         map.setRegion(locationRegion, animated: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)){
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = location
+            annotation.title = placeName
+            annotation.subtitle = "\(location.latitude), \(location.longitude)"
+//            let pin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+            self.map.addAnnotation(annotation)
+        }
+        
     }
     
     
