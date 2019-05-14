@@ -66,6 +66,7 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
         if isEdit {
             displayPlace()
         }
+        
 //        if self.splitViewController?.viewControllers.count == 2 {
 //            let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(createNewPlace(_:)))
 //            navigationItem.leftBarButtonItem = doneButton
@@ -118,7 +119,8 @@ class AddPlaceViewController: UITableViewController, UITextFieldDelegate {
     // MARK: - UITextFieldDelegate function
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder() // dismiss keyboard
-        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(createNewPlace(_:)))
+        navigationItem.leftBarButtonItem = doneButton
         // if user has enter place, then foward track the geolocation and display to the text field
         let placeAddress = placeAddressInput.text ?? ""
         if placeAddress != "" {
