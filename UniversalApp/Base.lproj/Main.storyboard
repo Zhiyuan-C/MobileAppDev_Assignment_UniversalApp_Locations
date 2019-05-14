@@ -97,10 +97,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <mapView key="tableFooterView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="1Gy-Kn-dFp">
-                            <rect key="frame" x="0.0" y="305.5" width="375" height="297"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </mapView>
                         <sections>
                             <tableViewSection headerTitle="NAME AND ADDRESS" id="woY-kh-Lvw">
                                 <cells>
@@ -235,6 +231,29 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Map" id="awo-C1-32I">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="258" id="t5T-XP-0m6">
+                                        <rect key="frame" x="0.0" y="343.5" width="375" height="258"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="t5T-XP-0m6" id="I86-cM-nAW">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="257.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="rt2-Wu-rMo">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="258"/>
+                                                </mapView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="rt2-Wu-rMo" secondAttribute="trailing" id="K1m-45-c40"/>
+                                                <constraint firstItem="rt2-Wu-rMo" firstAttribute="top" secondItem="I86-cM-nAW" secondAttribute="top" id="SAg-HP-Agd"/>
+                                                <constraint firstItem="rt2-Wu-rMo" firstAttribute="leading" secondItem="I86-cM-nAW" secondAttribute="leading" id="ebF-jQ-ve2"/>
+                                                <constraint firstItem="rt2-Wu-rMo" firstAttribute="centerY" secondItem="I86-cM-nAW" secondAttribute="centerY" id="jS1-Kb-p3D"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="V2G-qx-SD3" id="5Rm-Dz-Wbr"/>
@@ -249,7 +268,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="map" destination="1Gy-Kn-dFp" id="We3-kl-dkw"/>
+                        <outlet property="map" destination="rt2-Wu-rMo" id="s2H-HU-PNf"/>
                         <outlet property="placeAddressInput" destination="PR8-CS-eMQ" id="5sQ-t1-20i"/>
                         <outlet property="placeLatitudeInput" destination="2Hz-Hm-qew" id="t4F-jt-oyd"/>
                         <outlet property="placeLongitudeInput" destination="blx-ft-mV6" id="QvQ-9B-Rrx"/>
